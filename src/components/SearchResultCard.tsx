@@ -49,15 +49,17 @@ const SearchResultCard = ({ hotel }: Props) => {
                 `+${hotel.facilities.length - 3} more`}
             </span>
           </div>
-          <div className="flex flex-col items-end gap-1">
-            <span className="font-bold">€{hotel.pricePerNight} per night</span>
-            <Link
-              to={`/detail/${hotel._id}`}
-              className="h-full p-2 text-xl font-bold text-white bg-blue-600 max-w-fit hover:bg-blue-500"
-            >
-              View More
-            </Link>
-          </div>
+        </div>
+        <div className="flex items-center justify-between pt-2">
+          <span className="font-bold text-green-900">
+            €{hotel.pricePerNight} Per Night
+          </span>
+          <Link
+            to={`/detail/${hotel._id}`}
+            className="h-full p-2 font-bold text-white bg-blue-600 text-md max-w-fit hover:bg-blue-500"
+          >
+            View More
+          </Link>
         </div>
       </div>
     </div>
