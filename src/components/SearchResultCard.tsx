@@ -1,18 +1,26 @@
 import { HotelType } from "@/types/HotelType";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from "react-image-gallery";
 
 type Props = {
   hotel: HotelType;
 };
 
 const SearchResultCard = ({ hotel }: Props) => {
+  const images = hotel.imageUrls.map((image) => ({
+    original: image,
+  }));
+
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
-      <div className="w-full h-[300px]">
-        <img
-          src={hotel.imageUrls[0]}
-          className="object-cover object-center w-full h-full"
+      <div className="w-full h-[200px]">
+        <ImageGallery
+          showBullets={true}
+          showPlayButton={false}
+          showThumbnails={false}
+          items={images}
         />
       </div>
       <div className="grid grid-rows-[1fr_2fr_1fr]">
