@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import * as apiClient from "../api/api-client.ts";
 import { AiFillStar } from "react-icons/ai";
 import ImageGallery from "react-image-gallery";
-import GuestInfo from "../forms/GuestInfoForm/GuestInfo.tsx";
+import GuestInfoForm from "../forms/GuestInfoForm/GuestInfo.tsx";
 
 const Detail = () => {
   const { hotelId } = useParams();
@@ -34,11 +34,12 @@ const Detail = () => {
         </span>
         <h1 className="text-3xl font-bold">{hotel.name}</h1>
       </div>
-      <div className="w-[650px]">
+      <div className="w-[450px]">
         <ImageGallery
           showBullets={true}
           showPlayButton={false}
           showThumbnails={false}
+          useBrowserFullscreen={false}
           items={images}
         />
       </div>
@@ -52,7 +53,10 @@ const Detail = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
         <div className="whitespace-pre-line">{hotel.description}</div>
         <div className="h-fit">
-          <GuestInfo pricePerNight={hotel.pricePerNight} hotelId={hotel._id} />
+          <GuestInfoForm
+            pricePerNight={hotel.pricePerNight}
+            hotelId={hotel._id}
+          />
         </div>
       </div>
     </div>

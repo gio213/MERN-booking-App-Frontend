@@ -17,7 +17,7 @@ type GuestInfoFormData = {
   childCount: number;
 };
 
-const GuestInfo = ({ hotelId, pricePerNight }: Props) => {
+const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const search = useSearchContext();
@@ -157,4 +157,4 @@ const GuestInfo = ({ hotelId, pricePerNight }: Props) => {
   );
 };
 
-export default GuestInfo;
+export default GuestInfoForm;
