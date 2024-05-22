@@ -14,6 +14,7 @@ export type HotelType = {
     imageUrls: string[];
     imageFiles: FileList;
     bookings: BookingType[]
+    lastUpdated: Date
 }
 
 export type BookingType = {

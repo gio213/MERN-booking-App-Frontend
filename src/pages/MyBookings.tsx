@@ -25,7 +25,14 @@ const MyBookings = () => {
           </div>
           <div className="flex flex-col gap-4 overflow-y-auto max-h-[300px]">
             <div className="text-2xl font-bold">
-              {hotel.name}
+              <div className="flex justify-between">
+                {hotel.name}
+                <span className="flex items-center ">
+                  {" "}
+                  <span className="mr-2">Confirmed</span>
+                  <MdOutlineDoneAll className="text-green-500" />
+                </span>
+              </div>
               <div className="text-xs font-normal">
                 {hotel.city}, {hotel.country}
               </div>
@@ -47,11 +54,6 @@ const MyBookings = () => {
                 </div>
               </div>
             ))}
-            <span className="flex items-center justify-end ">
-              {" "}
-              <span className="mr-2">Confirmed</span>
-              <MdOutlineDoneAll className="text-green-500" />
-            </span>
           </div>
         </div>
       ))}
