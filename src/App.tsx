@@ -14,6 +14,7 @@ import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
+import PasswordReset from "./pages/PasswordReset";
 function App() {
   const { isLoggedIn } = useAppContext();
   return (
@@ -48,6 +49,14 @@ function App() {
           element={
             <Layout>
               <Register />
+            </Layout>
+          }
+        />
+        <Route
+          path="/password-reset"
+          element={
+            <Layout>
+              <PasswordReset />
             </Layout>
           }
         />

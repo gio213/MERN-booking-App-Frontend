@@ -4,15 +4,13 @@ import * as apiClient from "../api/api-client";
 import { useAppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 
-export type RegisterFormData = {
+export type PasswordResetFormData = {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
   confirmPassword: string;
 };
 
-const Register = () => {
+const PasswordReset = () => {
   const { showToast } = useAppContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -21,47 +19,27 @@ const Register = () => {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormData>();
+  } = useForm<PasswordResetFormData>();
 
   const onSubmit = handleSubmit((data) => {
     mutation.mutate(data);
   });
 
-  const mutation = useMutation(apiClient.register, {
+  const mutation = useMutation(apiClient.resetPassword, {
     onSuccess: async () => {
-      showToast({ message: "Registration Success!", type: "SUCCESS" });
+      showToast({ message: "Password Reset Success!", type: "SUCCESS" });
       await queryClient.invalidateQueries("validateToken");
-      navigate("/");
+      navigate("/sign-in");
     },
     onError: (error: Error) => {
       showToast({ message: error.message, type: "ERROR" });
     },
   });
+
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Create an Account</h2>
-      <div className="flex flex-col gap-5 md:flex-row">
-        <label className="flex-1 text-sm font-bold text-gray-700">
-          First Name
-          <input
-            className="w-full px-2 py-1 font-normal border rounded"
-            {...register("firstName", { required: "This field is required" })}
-          ></input>
-          {errors.firstName && (
-            <span className="text-red-500">{errors.firstName.message}</span>
-          )}
-        </label>
-        <label className="flex-1 text-sm font-bold text-gray-700">
-          Last Name
-          <input
-            className="w-full px-2 py-1 font-normal border rounded"
-            {...register("lastName", { required: "This field is required" })}
-          ></input>
-          {errors.lastName && (
-            <span className="text-red-500">{errors.lastName.message}</span>
-          )}
-        </label>
-      </div>
+      <div className="flex flex-col gap-5 md:flex-row"></div>
       <label className="flex-1 text-sm font-bold text-gray-700">
         Email
         <input
@@ -75,7 +53,7 @@ const Register = () => {
       </label>
       <div />
       <label className="flex-1 text-sm font-bold text-gray-700">
-        Password
+        New Password
         <input
           type="password"
           className="w-full px-2 py-1 font-normal border rounded"
@@ -115,11 +93,11 @@ const Register = () => {
           type="submit"
           className="p-2 text-xl font-bold text-white bg-blue-600 hover:bg-blue-500"
         >
-          Create Account
+          Reset Password
         </button>
       </span>
     </form>
   );
 };
 
-export default Register;
+export default PasswordReset;

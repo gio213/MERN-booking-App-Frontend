@@ -2,6 +2,9 @@ import { HotelSearchResponse, HotelType } from "@/types/HotelType";
 import { RegisterFormData } from "../pages/Register";
 import { SignInFormData } from "../pages/Signin";
 import { UserType } from "../types/User";
+import { PasswordResetFormData } from "@/pages/PasswordReset";
+import { PaymentIntentResponse } from "@/types/PaymentIntent";
+import { BookingFormData } from "@/components/BookingForm";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -187,4 +190,51 @@ export const fetchCurrentUser = async (): Promise<UserType> => {
         throw new Error("Error fetching user")
     }
     return respones.json()
+}
+
+
+export const resetPassword = async (formData: PasswordResetFormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/users/password-reset`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+
+    if (!response.ok) {
+        throw new Error("Error resetting password")
+    }
+    return response.json()
+}
+
+export const createPaymentIntent = async (hotelId: string, numberOfNights: string): Promise<PaymentIntentResponse> => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`, {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({ numberOfNights }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    if (!response.ok) {
+        throw new Error("Error creating payment intent")
+    }
+    return response.json()
+}
+
+
+export const createBooking = async (formData: BookingFormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify(formData)
+    })
+    if (!response.ok) {
+        throw new Error("Error creating booking")
+    }
 }

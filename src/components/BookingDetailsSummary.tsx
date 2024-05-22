@@ -18,7 +18,7 @@ const BookingDetailsSummary = ({
   hotel,
 }: Props) => {
   return (
-    <div className="grid p-5 border rounded-lg gap04 border-slate-300 h-fit">
+    <div className="grid gap-4 p-5 border rounded-lg border-slate-300 h-fit">
       <h2 className="text-xl font-bold">Your Booking Details</h2>
       <div className="py-2 border-b">
         Location:
