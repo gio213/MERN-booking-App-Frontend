@@ -15,6 +15,7 @@ import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
 import PasswordReset from "./pages/PasswordReset";
+import MyBookings from "./pages/MyBookings";
 function App() {
   const { isLoggedIn } = useAppContext();
   return (
@@ -83,6 +84,14 @@ function App() {
               element={
                 <Layout>
                   <MyHotels />
+                </Layout>
+              }
+            />
+            <Route
+              path="/my-bookings"
+              element={
+                <Layout>
+                  <MyBookings />
                 </Layout>
               }
             />
